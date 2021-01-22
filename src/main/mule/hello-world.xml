@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3cc0feec-0af4-4105-adfd-a338b167d7b0" >
+		<http:listener-connection host="0.0.0.0" port="${http.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="bfc4f31f-8d0b-4644-96be-723ea913f646" file="config.yaml" />
+	<api-gateway:autodiscovery apiId="16386836" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="11ba3266-d778-4e56-8555-416843e7eff0" flowRef="hello-worldFlow" />
+	<flow name="hello-worldFlow" doc:id="09e458a7-9c4b-436b-b9ae-a55b99ffd127" >
+		<http:listener doc:name="Listener" doc:id="a0f2cf6d-0127-4829-8918-626670acc19b" config-ref="HTTP_Listener_config" path="/sample"/>
+		<set-payload value='#["hello bharth"]' doc:name="Set Payload" doc:id="7e901c33-548b-456a-81f0-dad561318fca" />
+	</flow>
+</mule>
